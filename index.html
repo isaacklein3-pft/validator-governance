@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Superstructure M3 – Founding Cohort Governance Coordination Model</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; font-size: 16px; line-height: 1.7; color: #1a1a1a; background: #fafaf8; }
+    code { font-family: 'Courier New', monospace; background: #f1f5f9; border: 1px solid #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    .cover { background: #0f1923; color: #fff; padding: 80px 60px 60px; border-bottom: 4px solid #2563eb; }
+    .cover .label { font-family: 'Courier New', monospace; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #64748b; margin-bottom: 24px; }
+    .cover h1 { font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; color: #f8fafc; }
+    .cover .subtitle { font-size: 17px; color: #94a3b8; margin-bottom: 40px; font-style: italic; }
+    .cover .meta { display: flex; gap: 40px; flex-wrap: wrap; }
+    .cover .meta-item { font-family: 'Courier New', monospace; font-size: 12px; }
+    .cover .meta-item span { display: block; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .cover .meta-item strong { color: #e2e8f0; font-size: 13px; }
+    .container { max-width: 860px; margin: 0 auto; padding: 60px 40px; }
+    .toc { background: #f1f5f9; border-left: 4px solid #2563eb; padding: 28px 32px; margin-bottom: 56px; border-radius: 0 6px 6px 0; }
+    .toc h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #64748b; margin-bottom: 16px; font-family: 'Courier New', monospace; }
+    .toc ol { list-style: none; counter-reset: toc; }
+    .toc ol li { counter-increment: toc; padding: 5px 0; }
+    .toc ol li::before { content: counter(toc, decimal-leading-zero) " "; font-family: 'Courier New', monospace; font-size: 12px; color: #94a3b8; margin-right: 8px; }
+    .toc ol li a { color: #1e40af; text-decoration: none; font-size: 14px; }
+    .toc ol li a:hover { text-decoration: underline; }
+    .section { margin-bottom: 56px; padding-bottom: 56px; border-bottom: 1px solid #e2e8f0; scroll-margin-top: 24px; }
+    .section:last-child { border-bottom: none; }
+    .section-number { font-family: 'Courier New', monospace; font-size: 12px; letter-spacing: 2px; color: #2563eb; text-transform: uppercase; margin-bottom: 8px; }
+    h2 { font-size: 26px; font-weight: 700; color: #0f172a; margin-bottom: 20px; line-height: 1.3; }
+    h3 { font-size: 18px; font-weight: 600; color: #1e293b; margin-top: 32px; margin-bottom: 12px; }
+    h4 { font-size: 14px; font-weight: 700; color: #334155; text-transform: uppercase; letter-spacing: 1px; margin-top: 24px; margin-bottom: 8px; }
+    p { margin-bottom: 16px; color: #374151; }
+    ul, ol { margin: 12px 0 20px 24px; }
+    li { margin-bottom: 8px; color: #374151; }
+    .callout { border-radius: 6px; padding: 20px 24px; margin: 24px 0; }
+    .callout.info { background: #eff6ff; border: 1px solid #bfdbfe; }
+    .callout.constraint { background: #f0fdf4; border: 1px solid #86efac; }
+    .callout.critical { background: #fef2f2; border: 1px solid #fca5a5; }
+    .callout.tradeoff { background: #faf5ff; border-left: 4px solid #a855f7; border-top: none; border-right: none; border-bottom: none; border-radius: 0 6px 6px 0; padding-left: 20px; }
+    .callout strong { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 8px; }
+    .three-layer { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: #e2e8f0; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; margin: 24px 0; }
+    .layer-block { background: #fff; padding: 24px; }
+    .layer-block .layer-label { font-family: 'Courier New', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #2563eb; margin-bottom: 8px; }
+    .layer-block h4 { font-size: 15px; text-transform: none; letter-spacing: 0; color: #0f172a; margin-top: 0; margin-bottom: 12px; }
+    .layer-block ul { margin-left: 16px; font-size: 14px; }
+    .phase-list { list-style: none; margin: 0; padding: 0; }
+    .phase-list > li { display: flex; gap: 20px; margin-bottom: 0; position: relative; }
+    .phase-list > li:not(:last-child)::after { content: ''; position: absolute; left: 19px; top: 44px; bottom: -8px; width: 2px; background: #e2e8f0; }
+    .phase-num { background: #2563eb; color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Courier New', monospace; font-size: 13px; font-weight: bold; flex-shrink: 0; margin-top: 2px; }
+    .phase-body { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 24px; margin-bottom: 16px; flex: 1; }
+    .phase-body h4 { margin-top: 0; font-size: 15px; text-transform: none; letter-spacing: 0; color: #0f172a; margin-bottom: 10px; }
+    .phase-body p { margin: 0 0 10px; font-size: 14px; }
+    .phase-body ul { margin: 8px 0 0 18px; font-size: 14px; }
+    .phase-tag { display: inline-block; border-radius: 4px; padding: 3px 10px; font-family: 'Courier New', monospace; font-size: 11px; margin-top: 6px; margin-right: 4px; }
+    .phase-tag.success { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+    .phase-tag.fail { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+    .phase-tag.rollback { background: #fff7ed; border: 1px solid #fdba74; color: #9a3412; }
+    .spec-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 20px 0; }
+    .spec-table th { background: #1e293b; color: #f8fafc; text-align: left; padding: 12px 16px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+    .spec-table td { padding: 12px 16px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+    .spec-table tr:nth-child(even) td { background: #f8fafc; }
+    .state-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 20px 0; }
+    .state-table th { background: #1e293b; color: #f8fafc; text-align: left; padding: 10px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+    .state-table td { padding: 9px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; line-height: 1.5; }
+    .state-table tr:nth-child(even) td { background: #f8fafc; }
+    .schema-block { background: #0f1923; border-radius: 8px; padding: 24px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.9; overflow-x: auto; }
+    .schema-block .sf { color: #93c5fd; }
+    .schema-block .st { color: #6ee7b7; }
+    .schema-block .sc { color: #64748b; font-style: italic; }
+    .schema-block .sb { color: #e2e8f0; }
+    .error-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+    .error-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 16px; }
+    .error-card .e-code { font-family: 'Courier New', monospace; font-size: 11px; color: #991b1b; font-weight: bold; margin-bottom: 4px; }
+    .error-card .e-name { font-size: 13px; font-weight: 600; color: #1e293b; margin-bottom: 4px; }
+    .error-card p { font-size: 12px; color: #64748b; margin: 0; line-height: 1.5; }
+    .assumption-item { border-left: 3px solid #f59e0b; padding: 12px 16px; margin: 10px 0; background: #fff; border-radius: 0 6px 6px 0; }
+    .assumption-item .a-id { font-family: 'Courier New', monospace; font-size: 11px; color: #92400e; font-weight: bold; margin-bottom: 4px; }
+    .unknown-item { border-left: 3px solid #ef4444; padding: 12px 16px; margin: 10px 0; background: #fff; border-radius: 0 6px 6px 0; }
+    .unknown-item .u-id { font-family: 'Courier New', monospace; font-size: 11px; color: #991b1b; font-weight: bold; margin-bottom: 4px; }
+    .assumption-item p, .unknown-item p { font-size: 14px; margin: 0; color: #374151; }
+    .badge { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 11px; font-weight: 700; font-family: 'Courier New', monospace; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 8px; }
+    .badge.confirmed { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+    .badge.open { background: #fffbeb; color: #854d0e; border: 1px solid #fcd34d; }
+    .event-list { list-style: none; margin: 0; padding: 0; }
+    .event-list li { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f1f5f9; align-items: flex-start; }
+    .event-tag { font-family: 'Courier New', monospace; font-size: 11px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 4px; padding: 2px 8px; color: #1e40af; white-space: nowrap; margin-top: 2px; }
+    .event-tag.err { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
+    .threshold-row { display: flex; gap: 0; margin: 4px 0; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden; }
+    .th-label { background: #1e293b; color: #f8fafc; padding: 8px 16px; font-family: 'Courier New', monospace; font-size: 12px; min-width: 260px; }
+    .th-value { background: #fff; padding: 8px 16px; font-family: 'Courier New', monospace; font-size: 13px; color: #2563eb; font-weight: bold; min-width: 160px; }
+    .th-note { background: #f8fafc; padding: 8px 16px; font-size: 13px; color: #64748b; flex: 1; }
+    .evidence-list { counter-reset: ev; list-style: none; margin: 0; padding: 0; }
+    .evidence-list li { counter-increment: ev; display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
+    .evidence-list li::before { content: counter(ev, decimal-leading-zero); font-family: 'Courier New', monospace; font-size: 12px; color: #94a3b8; min-width: 24px; margin-top: 2px; }
+    .assurance { background: #0f1923; color: #e2e8f0; border-radius: 8px; padding: 32px; margin: 32px 0; }
+    .assurance .a-label { font-family: 'Courier New', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #64748b; margin-bottom: 16px; }
+    .assurance p { color: #cbd5e1; font-size: 15px; margin-bottom: 12px; }
+    .assurance p:last-child { margin-bottom: 0; }
+    .channel-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 24px; margin: 12px 0; }
+    .channel-card .ch-label { font-family: 'Courier New', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #2563eb; margin-bottom: 6px; }
+    .channel-card h4 { font-size: 15px; text-transform: none; letter-spacing: 0; color: #0f172a; margin-top: 0; margin-bottom: 8px; }
+    .channel-card p { font-size: 14px; margin: 0; color: #374151; }
+    .cadence-row { display: flex; align-items: stretch; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden; margin: 6px 0; }
+    .cadence-freq { background: #1e293b; color: #f8fafc; padding: 10px 16px; font-family: 'Courier New', monospace; font-size: 12px; min-width: 120px; display: flex; align-items: center; }
+    .cadence-body { padding: 10px 16px; font-size: 14px; color: #374151; flex: 1; }
+    .cadence-body strong { color: #0f172a; }
+    .changelog-row { display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid #f1f5f9; }
+    .changelog-row .cl-ver { font-family: 'Courier New', monospace; font-size: 12px; color: #2563eb; min-width: 40px; font-weight: bold; }
+    .changelog-row .cl-date { font-family: 'Courier New', monospace; font-size: 12px; color: #94a3b8; min-width: 100px; }
+    .changelog-row .cl-note { color: #374151; font-size: 13px; line-height: 1.6; }
+    .check { color: #16a34a; font-weight: bold; }
+    .footer-bar { background: #0f1923; color: #64748b; text-align: center; padding: 32px; font-family: 'Courier New', monospace; font-size: 12px; letter-spacing: 1px; }
+    @media (max-width: 640px) { .cover { padding: 40px 24px; } .container { padding: 40px 20px; } .three-layer, .error-grid { grid-template-columns: 1fr; } .threshold-row, .cadence-row { flex-direction: column; } }
+    @media print { body { background: #fff; } .cover, .assurance, .schema-block { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .section { page-break-inside: avoid; } a { color: #000; text-decoration: none; } }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="label">Superstructure · Mission 3 · Validator Platform Activation</div>
+  <h1>Founding Cohort Governance Coordination Model</h1>
+  <div class="subtitle">Communication Channels, Upgrade Coordination, Segregation of Duties, and Dispute Resolution for the Superstructure Founding Validator Cohort</div>
+  <div class="meta">
+    <div class="meta-item"><span>Version</span><strong>1.0</strong></div>
+    <div class="meta-item"><span>Network</span><strong>Post Fiat (PFT)</strong></div>
+    <div class="meta-item"><span>Depends On</span><strong>M2 Full Suite · M3 Operator Integration · M3 Deployment Pathway · M3 Routing Logic</strong></div>
+    <div class="meta-item"><span>Owner</span><strong>Superstructure Operations</strong></div>
+    <div class="meta-item"><span>Classification</span><strong>Public</strong></div>
+    <div class="meta-item"><span>Last Updated</span><strong>March 2026</strong></div>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#purpose">Purpose and Scope</a></li>
+    <li><a href="#architecture">Governance Role in the Three-Layer Architecture</a></li>
+    <li><a href="#assumptions">Assumption Registry and Open Questions</a></li>
+    <li><a href="#step1">Step 1 — Communication Channels and Operational Cadence</a></li>
+    <li><a href="#step2">Step 2 — Governance Coordination for Network Upgrades and Emergency Patches</a></li>
+    <li><a href="#step3">Step 3 — Segregation of Duties During Governance Events</a></li>
+    <li><a href="#step4">Step 4 — Dispute Resolution and Escalation Pathways</a></li>
+    <li><a href="#statemachine">Governance State Machine</a></li>
+    <li><a href="#errors">Error Codes and Typed Failure Reasons</a></li>
+    <li><a href="#schemas">Governance Payload Schemas</a></li>
+    <li><a href="#events">Governance Event Registry</a></li>
+    <li><a href="#controls">Operational Controls and Runbook</a></li>
+    <li><a href="#evidence">Audit Evidence Artifacts</a></li>
+    <li><a href="#assurance">Zero-Custody Governance Assurance</a></li>
+    <li><a href="#verification">Completion Verification</a></li>
+    <li><a href="#changelog">Change Log</a></li>
+  </ol>
+</div>
+
+<!-- 01 PURPOSE -->
+<div class="section" id="purpose">
+  <div class="section-number">Section 01</div>
+  <h2>Purpose and Scope</h2>
+  <p>This specification defines how the Superstructure founding validator cohort coordinates governance participation, network upgrades, and operational communication while maintaining the zero-custody design and segregation of duties established in M2. It is the final M3 deliverable — the one that answers a question the architecture specs deliberately deferred: now that operators, institutions, and middleware are all defined and deployed, how do they actually make decisions together?</p>
+  <p>The governing tension is this: effective decentralized governance requires coordinated action across multiple independent parties. But governance votes on Post Fiat are root-gated actions — they require institutional signing ceremonies. Deliberation can happen anywhere. Execution cannot happen without the institution. This model defines the structures that make deliberation efficient while keeping execution custody-safe.</p>
+  <p>This document covers four things: the communication channels and operational cadence for the founding cohort; the coordination mechanics for network upgrades, routine proposals, and emergency patches; the role separation between institutional allocators, node operators, and the orchestration layer during governance events; and the dispute resolution and escalation pathways when cohort participants disagree or fail to act.</p>
+
+  <div class="callout tradeoff">
+    <strong>Design Decision — Why Deliberation and Execution Are Structurally Separated</strong>
+    A simpler model would have middleware aggregate votes and execute approved proposals automatically. We rejected this because governance votes on Post Fiat are root-gated actions — they require institutional signing ceremonies. Giving middleware execution authority over governance outcomes would collapse the custody boundary that M2 was built to protect. The tradeoff is that execution speed is bounded by the slowest participating institution's signing ceremony window. That cost is acceptable: governance events are not latency-sensitive the way routing failover is, and institutional authorization on governance outcomes is a feature, not a bottleneck.
+  </div>
+</div>
+
+<!-- 02 ARCHITECTURE -->
+<div class="section" id="architecture">
+  <div class="section-number">Section 02</div>
+  <h2>Governance Role in the Three-Layer Architecture</h2>
+  <p>Governance coordination spans all three layers, but with strictly defined roles. Deliberation happens across layers. Execution requires Layer 1.</p>
+  <div class="three-layer">
+    <div class="layer-block">
+      <div class="layer-label">Layer 1 — Institution</div>
+      <h4>Deliberates. Votes. Signs.</h4>
+      <ul>
+        <li>Participates in proposal discussion via governance forum</li>
+        <li>Casts binding governance votes via signing ceremony</li>
+        <li>Authorizes upgrade execution by signing upgrade payload</li>
+        <li>Escalates disputes to Superstructure Governance Council</li>
+        <li>Cannot be compelled to sign by middleware or operators</li>
+      </ul>
+    </div>
+    <div class="layer-block">
+      <div class="layer-label">Layer 2 — Operator</div>
+      <h4>Advises. Implements. Reports.</h4>
+      <ul>
+        <li>Submits technical proposals via governance forum</li>
+        <li>Provides technical assessment of upgrade feasibility</li>
+        <li>Implements approved upgrades on operator infrastructure</li>
+        <li>Cannot cast binding governance votes</li>
+        <li>Cannot execute root-gated actions</li>
+      </ul>
+    </div>
+    <div class="layer-block">
+      <div class="layer-label">Layer 3 — Middleware</div>
+      <h4>Coordinates. Constructs. Broadcasts.</h4>
+      <ul>
+        <li>Publishes proposals to all cohort participants</li>
+        <li>Constructs unsigned governance payloads</li>
+        <li>Aggregates signed votes and checks quorum</li>
+        <li>Broadcasts approved execution transactions</li>
+        <li>Cannot vote, approve, or execute without institutional signatures</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout constraint">
+    <strong>The Governance Custody Guarantee</strong>
+    A governance proposal that reaches quorum does not execute automatically. Middleware checks quorum and constructs the execution payload. Execution requires a threshold of participating institutions to sign that payload via signing ceremony. The orchestration layer cannot execute any governance outcome unilaterally — not upgrades, not parameter changes, not emergency patches. Every execution is institutionally authorized.
+  </div>
+</div>
+
+<!-- 03 ASSUMPTIONS -->
+<div class="section" id="assumptions">
+  <div class="section-number">Section 03</div>
+  <h2>Assumption Registry and Open Questions</h2>
+
+  <h4>Confirmed Assumptions</h4>
+  <div class="assumption-item">
+    <div class="a-id">ASSUMPTION-01 <span class="badge confirmed">Confirmed</span></div>
+    <p>Governance votes on Post Fiat are root-gated actions. They require institutional signing ceremonies. Middleware constructs the unsigned payload. The institution signs inside its custody environment. Middleware broadcasts the signed transaction. This is the same ceremony flow defined in M2 and M3 — governance is not a special case.</p>
+  </div>
+  <div class="assumption-item">
+    <div class="a-id">ASSUMPTION-02 <span class="badge confirmed">Confirmed</span></div>
+    <p>The founding cohort operates under a supermajority threshold model: routine proposals require 67% of participating institutions to approve. Emergency patches require 51%. Constitutional changes require 80%. These thresholds are encoded in the institution's allocation policy and enforced by middleware quorum checking.</p>
+  </div>
+  <div class="assumption-item">
+    <div class="a-id">ASSUMPTION-03 <span class="badge confirmed">Confirmed</span></div>
+    <p>Maker/Checker/Reviewer role separation applies to governance signing as it does to all root-gated actions. An institution cannot have the same individual prepare and sign a governance payload. The Reviewer role is required for governance votes because they are classified as high-value actions equivalent to key rotation in their network impact.</p>
+  </div>
+
+  <h4>Open Assumptions</h4>
+  <div class="assumption-item">
+    <div class="a-id">ASSUMPTION-04 <span class="badge open">Open</span></div>
+    <p>The founding cohort size is assumed to be 5–15 institutional participants for quorum calculation purposes. If the cohort size changes materially, quorum thresholds should be revisited. This spec uses a minimum quorum of 3 participating institutions to prevent two parties from pushing through governance outcomes over a temporarily offline third.</p>
+  </div>
+
+  <h4>Open Questions — Needs Confirmation from Post Fiat Core</h4>
+  <div class="unknown-item">
+    <div class="u-id">UNKNOWN-01 — On-Chain Governance Transaction Type</div>
+    <p>What is the specific on-chain transaction type for casting a governance vote on Post Fiat? Is it a dedicated governance opcode, a metadata field on a standard transaction, or a UNL amendment mechanism? Until confirmed, this spec uses <code>GOVERNANCE_VOTE</code> as the placeholder actionClass in signing ceremony envelopes.</p>
+  </div>
+  <div class="unknown-item">
+    <div class="u-id">UNKNOWN-02 — Emergency Patch Authority</div>
+    <p>Does Post Fiat core retain unilateral authority to push emergency patches to the network independent of validator governance? If so, the emergency patch coordination process in Step 2 covers cohort coordination around a patch already in progress — not cohort authorization of the patch itself.</p>
+  </div>
+  <div class="unknown-item">
+    <div class="u-id">UNKNOWN-03 — Quorum Counting Mechanism</div>
+    <p>Is quorum calculated by number of participating institutions, by validator stake weight, or by Verified Inference score weight? This spec defaults to institution count (one institution, one vote) pending confirmation of the Post Fiat governance model.</p>
+  </div>
+</div>
+
+<!-- 04 STEP 1 -->
+<div class="section" id="step1">
+  <div class="section-number">Step 01</div>
+  <h2>Communication Channels and Operational Cadence</h2>
+
+  <p>The founding cohort operates across three communication tiers: asynchronous governance deliberation, synchronous operational coordination, and emergency response. Each tier has defined participants, response time expectations, and escalation paths. No governance decision is made in a single channel — deliberation and execution are always in separate tiers.</p>
+
+  <h3>Communication Channels</h3>
+
+  <div class="channel-card">
+    <div class="ch-label">Tier 1 — Governance Forum</div>
+    <h4>Async Deliberation</h4>
+    <p>The primary venue for proposal submission, technical discussion, and pre-vote deliberation. All proposals must spend a minimum of 5 days in the governance forum before a vote is called. Participants: all cohort institutions and operators. Middleware publishes proposal summaries automatically when a new proposal is submitted. The forum record is the authoritative deliberation log — it is the evidence that a proposal was adequately discussed before execution.</p>
+  </div>
+
+  <div class="channel-card">
+    <div class="ch-label">Tier 2 — Operational Coordination Channel</div>
+    <h4>Sync Operational Updates</h4>
+    <p>A dedicated channel for operational announcements, telemetry alerts, SLA status updates, and planned maintenance notices. Not a governance venue — no binding decisions made here. Response time expectation: acknowledgment within 4 hours for operational alerts, within 15 minutes for degraded validator alerts. Participants: operators and middleware operations. Institutions receive automated summaries from this channel, not raw channel access.</p>
+  </div>
+
+  <div class="channel-card">
+    <div class="ch-label">Tier 3 — Emergency Response Channel</div>
+    <h4>Critical Incident Coordination</h4>
+    <p>Activated only for Severity 1 incidents: active network partition, signing ceremony compromise, coordinated operator failure, or emergency patch deployment. Response time expectation: acknowledgment within 15 minutes of activation. All three layers participate. Middleware activates the channel automatically when <code>GOVERNANCE_EMERGENCY_ACTIVATED</code> fires. Tier 3 channel records are classified as audit evidence for any emergency action taken.</p>
+  </div>
+
+  <div class="channel-card">
+    <div class="ch-label">Tier 4 — Governance Council</div>
+    <h4>Dispute Resolution and Deadlock Breaking</h4>
+    <p>A standing body of 3–5 independent members with no direct stake in any cohort operator or institution. Convened only when escalated disputes cannot be resolved through standard channels or when the cohort reaches governance deadlock. Decisions are advisory for routine disputes and binding for deadlock resolution. See Step 4 for full escalation pathway.</p>
+  </div>
+
+  <h3>Operational Cadence</h3>
+
+  <div class="cadence-row">
+    <div class="cadence-freq">Weekly</div>
+    <div class="cadence-body"><strong>Cohort Operational Review</strong> — Middleware publishes weekly validator health summary: CRS scores, uptime rates, any failover events from the prior week, and open action items. Operators acknowledge within 24 hours. No institution action required unless an alert threshold is breached.</div>
+  </div>
+  <div class="cadence-row">
+    <div class="cadence-freq">Monthly</div>
+    <div class="cadence-body"><strong>Governance Status Review</strong> — Open proposals reviewed, voting timelines confirmed, and any pending operator remediation windows checked. Institutions with outstanding signing ceremony obligations from the prior month are notified. Quorum health checked — if fewer than the minimum 3 institutions are actively participating, Superstructure operations escalates.</div>
+  </div>
+  <div class="cadence-row">
+    <div class="cadence-freq">Quarterly</div>
+    <div class="cadence-body"><strong>Cohort Composition Review</strong> — Operator whitelist diversity audit, institution participation rate review, and Verified Inference score trend analysis. Any operator below the 30-day CRS trailing average threshold of 80 is flagged for performance review. Institutions that have missed more than 2 governance votes in the quarter are contacted for participation confirmation.</div>
+  </div>
+  <div class="cadence-row">
+    <div class="cadence-freq">As Needed</div>
+    <div class="cadence-body"><strong>Emergency Governance Session</strong> — Convened when a Severity 1 incident requires governance authorization within the standard deliberation window. Minimum notice: 1 hour. Quorum check: 51% of participating institutions must acknowledge within 15 minutes for the session to proceed.</div>
+  </div>
+  <br>
+
+  <h3>Threshold Reference</h3>
+  <div class="threshold-row"><div class="th-label">Minimum proposal deliberation period</div><div class="th-value">5 days</div><div class="th-note">Before any vote can be called on a non-emergency proposal</div></div>
+  <div class="threshold-row"><div class="th-label">Routine vote window</div><div class="th-value">7 days</div><div class="th-note">Institutions have 7 days to cast votes after vote is called</div></div>
+  <div class="threshold-row"><div class="th-label">Emergency vote window</div><div class="th-value">24 hours</div><div class="th-note">For Severity 1 incidents requiring governance action</div></div>
+  <div class="threshold-row"><div class="th-label">Emergency session acknowledgment</div><div class="th-value">15 minutes</div><div class="th-note">Institution must acknowledge to count toward quorum for emergency session</div></div>
+  <div class="threshold-row"><div class="th-label">Operational alert acknowledgment</div><div class="th-value">4 hours</div><div class="th-note">Operator acknowledgment of operational channel alerts</div></div>
+  <div class="threshold-row"><div class="th-label">Degraded validator alert response</div><div class="th-value">15 minutes</div><div class="th-note">Operator acknowledgment when validator CRS drops below 70</div></div>
+  <div class="threshold-row"><div class="th-label">Minimum quorum: institutions</div><div class="th-value">3</div><div class="th-note">Absolute floor regardless of cohort size or vote type</div></div>
+  <div class="threshold-row"><div class="th-label">Routine proposal quorum</div><div class="th-value">67%</div><div class="th-note">Of participating institutions; minimum 3</div></div>
+  <div class="threshold-row"><div class="th-label">Emergency patch quorum</div><div class="th-value">51%</div><div class="th-note">Of participating institutions; minimum 3; 24-hour window</div></div>
+  <div class="threshold-row"><div class="th-label">Constitutional change quorum</div><div class="th-value">80%</div><div class="th-note">Changes to quorum thresholds, role model, or custody requirements</div></div>
+  <div class="threshold-row"><div class="th-label">Upgrade execution window</div><div class="th-value">72 hours</div><div class="th-note">After quorum reached; all signing ceremonies must complete within this window</div></div>
+  <div class="threshold-row"><div class="th-label">Dispute escalation deadline</div><div class="th-value">48 hours</div><div class="th-note">From dispute filed to Governance Council acknowledgment</div></div>
+</div>
+
+<!-- 05 STEP 2 -->
+<div class="section" id="step2">
+  <div class="section-number">Step 02</div>
+  <h2>Governance Coordination for Network Upgrades and Emergency Patches</h2>
+
+  <h3>Standard Upgrade Process</h3>
+  <ul class="phase-list">
+    <li>
+      <div class="phase-num">1</div>
+      <div class="phase-body">
+        <h4>Proposal Submission</h4>
+        <p>Any cohort participant (institution or operator) submits a proposal to the governance forum. Middleware automatically publishes the proposal to all participants and starts the 5-day deliberation clock. Proposal must include: description, technical specification, expected network impact, rollback plan if the upgrade fails, and estimated operator implementation window.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_PROPOSAL_SUBMITTED</div>
+        <div class="phase-tag fail">Fail: ERR_PROPOSAL_INCOMPLETE — missing required fields</div>
+        <div class="phase-tag rollback">Rollback: Submitter notified of missing fields; proposal held in DRAFT state until complete</div>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">2</div>
+      <div class="phase-body">
+        <h4>Deliberation Period (minimum 5 days)</h4>
+        <p>Proposal open for discussion in governance forum. Operators provide technical feasibility assessment within 48 hours of submission. Institutions review and may request clarification. Middleware tracks deliberation activity — a proposal with zero comments after 48 hours triggers a <code>GOVERNANCE_PROPOSAL_INACTIVE</code> alert to the submitter.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_DELIBERATION_ACTIVE</div>
+        <div class="phase-tag fail">Fail: GOVERNANCE_PROPOSAL_INACTIVE — no engagement after 48 hours</div>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">3</div>
+      <div class="phase-body">
+        <h4>Vote Call</h4>
+        <p>After minimum 5-day deliberation, any institution may call a vote. Middleware confirms the deliberation period has elapsed and issues signing ceremony envelopes to all participating institutions. Each envelope contains the proposal hash, actionClass <code>GOVERNANCE_VOTE</code>, vote direction (approve/reject), and a 7-day expiry. The 120-second ceremony freshness window applies per individual signing — institutions do not all sign simultaneously.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_VOTE_CALLED</div>
+        <div class="phase-tag fail">Fail: ERR_DELIBERATION_PERIOD_NOT_ELAPSED</div>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">4</div>
+      <div class="phase-body">
+        <h4>Vote Collection (7-day window)</h4>
+        <p>Institutions cast votes via signing ceremony. Maker prepares the vote payload. Checker verifies the proposal hash matches the deliberation forum record before signing — this is the explicit control that prevents middleware from substituting a different proposal for the one institutions discussed. Reviewer authorizes. Signed vote transmitted to middleware.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_VOTE_RECEIVED</div>
+        <div class="phase-tag fail">Fail: ERR_VOTE_PAYLOAD_HASH_MISMATCH — proposal hash in envelope doesn't match forum record</div>
+        <div class="phase-tag rollback">Rollback: Institution rejects ceremony; middleware investigates envelope construction; escalate to Governance Council if mismatch is unexplained</div>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">5</div>
+      <div class="phase-body">
+        <h4>Quorum Check and Execution Authorization</h4>
+        <p>When the vote window closes or quorum is reached early, middleware tallies results. If quorum approves, middleware constructs the execution payload and issues a second round of signing ceremony envelopes — this time for the execution transaction, not the vote. Execution signing uses the same Maker/Checker/Reviewer model. The upgrade does not execute until execution signatures meet the quorum threshold within the 72-hour execution window.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_QUORUM_REACHED</div>
+        <div class="phase-tag fail">Fail: ERR_QUORUM_NOT_REACHED — vote window expired without sufficient approvals</div>
+        <div class="phase-tag rollback">Rollback: Proposal returned to DELIBERATION state; submitter may revise and resubmit</div>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">6</div>
+      <div class="phase-body">
+        <h4>Execution and Confirmation</h4>
+        <p>Middleware broadcasts the execution transaction once execution quorum is met. Operators implement the upgrade on their infrastructure within the operator implementation window specified in the proposal. Middleware monitors for <code>GOVERNANCE_UPGRADE_CONFIRMED</code> on-chain. If confirmation does not arrive within 10 ledger closes, middleware alerts all participants before any retry.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_UPGRADE_EXECUTED</div>
+        <div class="phase-tag success">Event: GOVERNANCE_UPGRADE_CONFIRMED</div>
+        <div class="phase-tag fail">Fail: ERR_UPGRADE_TX_NOT_CONFIRMED — no on-chain confirmation within 10 ledger closes</div>
+        <div class="phase-tag rollback">Rollback: Alert all participants; do not retry without fresh institution authorization; escalate if retry is needed</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="callout tradeoff">
+    <strong>Design Decision — Two-Round Signing (Vote + Execution) vs Single-Round</strong>
+    A single-round model would have institutions sign an "approve and execute" payload in one ceremony. We rejected this because it collapses deliberation and execution authorization into a single act. An institution that approves a proposal in principle must separately authorize the specific execution payload — these are different judgments. The Checker's job in the execution round is to verify the execution payload matches what was approved in the vote. That verification step only exists if there are two separate signing events. The cost is two signing ceremonies per governance outcome. The benefit is an explicit human check that the thing being executed matches the thing that was voted on.
+  </div>
+
+  <h3>Emergency Patch Process</h3>
+  <p>Emergency patches bypass the 5-day deliberation period but not the signing ceremony requirement. The deliberation period is compressed, not eliminated.</p>
+  <ul class="phase-list">
+    <li>
+      <div class="phase-num">1</div>
+      <div class="phase-body">
+        <h4>Emergency Declaration</h4>
+        <p>Superstructure operations or any institution declares an emergency via Tier 3 channel. Emergency must be classified: Severity 1 (active exploit or network partition) or Severity 2 (critical vulnerability, not yet exploited). Severity 1 triggers a 24-hour vote window. Severity 2 triggers a 48-hour vote window with a 1-hour deliberation minimum.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_EMERGENCY_ACTIVATED</div>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">2</div>
+      <div class="phase-body">
+        <h4>Emergency Quorum Check (15 minutes)</h4>
+        <p>Middleware checks that at least 51% of participating institutions acknowledge the emergency session within 15 minutes. Institutions that do not acknowledge are marked as <code>NON_RESPONSIVE_EMERGENCY</code> for the session. They are not removed from the cohort but are excluded from quorum calculation for this session. The 3-institution minimum still applies — if fewer than 3 institutions acknowledge, the emergency session cannot proceed and Superstructure operations escalates to the Governance Council directly.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_EMERGENCY_QUORUM_CONFIRMED</div>
+        <div class="phase-tag fail">Fail: ERR_EMERGENCY_QUORUM_INSUFFICIENT — fewer than 3 institutions acknowledged</div>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">3</div>
+      <div class="phase-body">
+        <h4>Compressed Deliberation and Vote</h4>
+        <p>Technical summary published immediately. Operators provide impact assessment within 30 minutes. Vote called as soon as the minimum deliberation period elapses (1 hour for Severity 2; immediate for Severity 1 with Governance Council authorization). Emergency vote uses 51% quorum threshold. All other signing ceremony requirements apply identically.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_EMERGENCY_VOTE_CALLED</div>
+        <div class="phase-tag success">Event: GOVERNANCE_EMERGENCY_QUORUM_REACHED</div>
+        <div class="phase-tag fail">Fail: ERR_EMERGENCY_VOTE_EXPIRED — 24-hour window elapsed without quorum</div>
+        <div class="phase-tag rollback">Rollback: Governance Council convenes; may authorize extended window or alternative remediation path</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- 06 STEP 3 -->
+<div class="section" id="step3">
+  <div class="section-number">Step 03</div>
+  <h2>Segregation of Duties During Governance Events</h2>
+
+  <p>Governance events involve all three layers acting in defined roles. The segregation model is the same as M2 — Maker/Checker/Reviewer at the institutional level, with operators and middleware in supporting roles that cannot substitute for institutional authorization.</p>
+
+  <h3>Role Matrix During Governance Events</h3>
+  <table class="spec-table">
+    <thead><tr><th>Action</th><th>Institution</th><th>Operator</th><th>Middleware</th></tr></thead>
+    <tbody>
+      <tr><td>Submit proposal</td><td>Yes</td><td>Yes</td><td>No (publishes only)</td></tr>
+      <tr><td>Participate in deliberation</td><td>Yes</td><td>Yes (technical advisory)</td><td>No</td></tr>
+      <tr><td>Call a vote</td><td>Yes</td><td>No</td><td>No</td></tr>
+      <tr><td>Cast a binding vote</td><td>Yes — via signing ceremony</td><td>No</td><td>No</td></tr>
+      <tr><td>Check quorum</td><td>No</td><td>No</td><td>Yes — automatically</td></tr>
+      <tr><td>Construct execution payload</td><td>No</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Sign execution payload</td><td>Yes — Checker verifies, Reviewer authorizes</td><td>No</td><td>No</td></tr>
+      <tr><td>Broadcast execution transaction</td><td>No</td><td>No</td><td>Yes — after execution quorum met</td></tr>
+      <tr><td>Implement upgrade on infrastructure</td><td>No</td><td>Yes — within specified window</td><td>No</td></tr>
+      <tr><td>Declare emergency</td><td>Yes</td><td>No</td><td>Yes (Superstructure ops)</td></tr>
+      <tr><td>Escalate dispute</td><td>Yes</td><td>Yes</td><td>Yes (Superstructure ops)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Institutional Role Separation During Governance Signing</h3>
+  <p>Every governance signing ceremony follows the Maker/Checker/Reviewer model from M2. For governance votes specifically:</p>
+  <ul>
+    <li><strong>Maker</strong> prepares the vote payload, confirming the proposal hash matches the governance forum record</li>
+    <li><strong>Checker</strong> independently verifies the proposal hash, vote direction, and envelope freshness before signing. The Checker must not be the same individual who prepared the payload. This is the explicit control that catches substituted or malformed payloads.</li>
+    <li><strong>Reviewer</strong> authorizes the ceremony. Governance votes are classified as high-value actions — the Reviewer role cannot be waived. An institution that cannot staff a Reviewer for a governance vote must abstain from that vote rather than submit an improperly authorized signature.</li>
+  </ul>
+
+  <div class="callout tradeoff">
+    <strong>Design Decision — Reviewer Required for All Governance Votes</strong>
+    The Reviewer role could have been optional for routine governance votes (protocol parameter adjustments, minor upgrades) and required only for constitutional changes. We rejected optional Reviewer status because it creates a category system that institutions must manage — and the natural pressure is to classify votes as "routine" to skip the Reviewer overhead. Every governance vote has network-level impact. The Reviewer is not overhead; it is the control that ensures institutional authorization is genuine rather than procedural. The cost is that institutions need three available personnel for any governance participation. That staffing requirement is an explicit design goal — governance participation should require institutional capacity, not just a single person with access to a key.
+  </div>
+
+  <h3>What Middleware Cannot Do During Governance</h3>
+  <p>Middleware has broad visibility into governance state but narrow execution authority. Specifically, middleware cannot:</p>
+  <ul>
+    <li>Cast or modify votes on behalf of any institution</li>
+    <li>Execute an approved proposal without execution quorum signatures</li>
+    <li>Declare a proposal approved before quorum is reached, even if the math suggests quorum is inevitable</li>
+    <li>Override or extend a vote window without institution confirmation</li>
+    <li>Submit a dispute on behalf of any participant</li>
+    <li>Classify a dispute as resolved without the disputing party's acknowledgment</li>
+  </ul>
+</div>
+
+<!-- 07 STEP 4 -->
+<div class="section" id="step4">
+  <div class="section-number">Step 04</div>
+  <h2>Dispute Resolution and Escalation Pathways</h2>
+
+  <p>Disputes in the founding cohort fall into three categories: technical disputes (disagreement about whether a proposed upgrade is safe or correct), process disputes (disagreement about whether governance procedures were followed), and custody disputes (a participant believes another party has violated the zero-custody model). Each has a defined resolution path.</p>
+
+  <h3>Dispute Classification and First-Response Window</h3>
+  <table class="spec-table">
+    <thead><tr><th>Dispute Type</th><th>Examples</th><th>First Response Window</th><th>Initial Resolution Path</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Technical</strong></td>
+        <td>Upgrade safety disagreement; telemetry methodology dispute; operator implementation quality</td>
+        <td>48 hours</td>
+        <td>Technical working group (2 operators + 1 independent technical advisor)</td>
+      </tr>
+      <tr>
+        <td><strong>Process</strong></td>
+        <td>Deliberation period shortened without authorization; vote called before quorum check; execution without sufficient signatures</td>
+        <td>24 hours</td>
+        <td>Superstructure operations review with governance forum record as evidence</td>
+      </tr>
+      <tr>
+        <td><strong>Custody</strong></td>
+        <td>Alleged middleware access to institutional keys; signing ceremony bypassed; unauthorized execution transaction</td>
+        <td>4 hours</td>
+        <td>Immediate escalation to Governance Council; all affected operations suspended pending review</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Escalation Pathway</h3>
+  <ul class="phase-list">
+    <li>
+      <div class="phase-num">1</div>
+      <div class="phase-body">
+        <h4>Dispute Filed</h4>
+        <p>Any cohort participant files a dispute via governance forum with: dispute type classification, specific allegation, supporting evidence (event logs, signing ceremony records, forum timestamps), and requested resolution. Middleware logs <code>GOVERNANCE_DISPUTE_FILED</code> with correlation ID and notifies all cohort participants within 30 minutes.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_DISPUTE_FILED</div>
+        <div class="phase-tag fail">Fail: ERR_DISPUTE_MISSING_EVIDENCE — filed without supporting documentation</div>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">2</div>
+      <div class="phase-body">
+        <h4>Response Period</h4>
+        <p>The disputed party responds within the first-response window for the dispute type (4 hours for custody, 24 hours for process, 48 hours for technical). Response must address each allegation with evidence. Failure to respond within the window is logged as <code>GOVERNANCE_DISPUTE_NO_RESPONSE</code> and automatically escalates to the Governance Council.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_DISPUTE_RESPONSE_RECEIVED</div>
+        <div class="phase-tag fail">Event: GOVERNANCE_DISPUTE_NO_RESPONSE — automatic escalation triggered</div>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">3</div>
+      <div class="phase-body">
+        <h4>Initial Resolution Attempt</h4>
+        <p>Superstructure operations facilitates resolution between the parties using the governance forum record as the authoritative evidence source. If the dispute is resolved, both parties acknowledge resolution and middleware logs <code>GOVERNANCE_DISPUTE_RESOLVED</code>. Resolution acknowledgment must be explicit — silence is not acknowledgment.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_DISPUTE_RESOLVED</div>
+        <div class="phase-tag fail">Fail: GOVERNANCE_DISPUTE_UNRESOLVED — parties cannot agree within 48 hours of response</div>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">4</div>
+      <div class="phase-body">
+        <h4>Governance Council Escalation</h4>
+        <p>Unresolved disputes escalate to the Governance Council within 48 hours of initial filing. The Council acknowledges the dispute within 48 hours of escalation and issues a ruling within 14 days. Council rulings are binding for custody disputes and process disputes. For technical disputes, the Council ruling is advisory — the cohort votes on implementation of the recommended resolution. Council records and reasoning are published to the governance forum.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_COUNCIL_RULING_ISSUED</div>
+        <div class="phase-tag fail">Fail: ERR_COUNCIL_QUORUM_UNAVAILABLE — Council cannot convene within timeline</div>
+        <div class="phase-tag rollback">Rollback: Extend ruling window by 7 days; notify all parties; suspend related governance activities pending ruling</div>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">5</div>
+      <div class="phase-body">
+        <h4>Remediation or Removal</h4>
+        <p>If the Governance Council ruling requires remediation from a participant, that participant has 30 days to comply. Failure to comply results in suspension from governance participation. Suspension from governance participation means an institution's votes are excluded from quorum calculations — the cohort can continue to function. Permanent removal from the cohort requires a fresh governance vote at the 80% constitutional threshold.</p>
+        <div class="phase-tag success">Event: GOVERNANCE_DISPUTE_REMEDIATION_COMPLETE</div>
+        <div class="phase-tag fail">Event: GOVERNANCE_PARTICIPANT_SUSPENDED</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="callout tradeoff">
+    <strong>Design Decision — Advisory vs Binding Council Rulings for Technical Disputes</strong>
+    Making Council rulings binding for technical disputes would give a 3–5 person Council the ability to force a specific technical implementation on the cohort. We rejected this because technical decisions have network-level consequences that the full cohort should own. The Council is selected for governance expertise, not necessarily deep Post Fiat protocol engineering. Their ruling sets the direction — the cohort votes on the specific implementation. For custody and process disputes, binding rulings are appropriate because those disputes are about whether rules were followed, not about technical judgment calls.
+  </div>
+</div>
+
+<!-- 08 STATE MACHINE -->
+<div class="section" id="statemachine">
+  <div class="section-number">Section 08</div>
+  <h2>Governance State Machine</h2>
+  <table class="state-table">
+    <thead><tr><th>From State</th><th>To State</th><th>Trigger Event</th><th>Severity</th><th>Required Action</th><th>Evidence</th></tr></thead>
+    <tbody>
+      <tr><td>—</td><td><strong>DRAFT</strong></td><td><code>GOVERNANCE_PROPOSAL_SUBMITTED</code></td><td>—</td><td>Middleware validates required fields; publishes to forum</td><td>Proposal document with all required fields</td></tr>
+      <tr><td>DRAFT</td><td><strong>DELIBERATION</strong></td><td><code>GOVERNANCE_DELIBERATION_ACTIVE</code></td><td>—</td><td>5-day clock starts; operators provide technical assessment within 48h</td><td>Forum submission timestamp</td></tr>
+      <tr><td>DELIBERATION</td><td><strong>VOTING</strong></td><td><code>GOVERNANCE_VOTE_CALLED</code></td><td>—</td><td>Middleware confirms deliberation elapsed; issues signing ceremony envelopes</td><td>Deliberation period elapsed log</td></tr>
+      <tr><td>VOTING</td><td><strong>QUORUM_REACHED</strong></td><td><code>GOVERNANCE_QUORUM_REACHED</code></td><td>—</td><td>Middleware tallies votes; constructs execution payload; issues execution envelopes</td><td>Signed vote records</td></tr>
+      <tr><td>VOTING</td><td><strong>FAILED</strong></td><td><code>ERR_QUORUM_NOT_REACHED</code></td><td>Medium</td><td>Proposal returned to DELIBERATION; submitter may revise</td><td>Vote tally with participation record</td></tr>
+      <tr><td>QUORUM_REACHED</td><td><strong>EXECUTION_PENDING</strong></td><td><code>GOVERNANCE_EXECUTION_ENVELOPES_ISSUED</code></td><td>—</td><td>72-hour execution window opens; institutions sign execution payload</td><td>Execution envelope hash</td></tr>
+      <tr><td>EXECUTION_PENDING</td><td><strong>EXECUTED</strong></td><td><code>GOVERNANCE_UPGRADE_EXECUTED</code></td><td>—</td><td>Middleware broadcasts; operators implement within specified window</td><td>Execution signatures, broadcast TX hash</td></tr>
+      <tr><td>EXECUTION_PENDING</td><td><strong>EXECUTION_FAILED</strong></td><td><code>ERR_EXECUTION_WINDOW_EXPIRED</code></td><td>High</td><td>Alert all participants; require fresh authorization before retry</td><td>Execution window expiry log</td></tr>
+      <tr><td>Any</td><td><strong>EMERGENCY</strong></td><td><code>GOVERNANCE_EMERGENCY_ACTIVATED</code></td><td>Critical</td><td>Tier 3 channel activated; 15-minute quorum acknowledgment window</td><td>Emergency declaration, Tier 3 activation log</td></tr>
+      <tr><td>Any</td><td><strong>DISPUTED</strong></td><td><code>GOVERNANCE_DISPUTE_FILED</code></td><td>Varies</td><td>Response window per dispute type; Superstructure ops notified</td><td>Dispute filing with evidence</td></tr>
+      <tr><td>DISPUTED</td><td><strong>RESOLVED</strong></td><td><code>GOVERNANCE_DISPUTE_RESOLVED</code></td><td>—</td><td>Both parties acknowledge resolution; middleware logs closure</td><td>Resolution acknowledgment from both parties</td></tr>
+      <tr><td>DISPUTED</td><td><strong>ESCALATED</strong></td><td><code>GOVERNANCE_COUNCIL_ESCALATED</code></td><td>High</td><td>Governance Council acknowledges within 48h; ruling within 14 days</td><td>Escalation record, Council acknowledgment</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 09 ERROR CODES -->
+<div class="section" id="errors">
+  <div class="section-number">Section 09</div>
+  <h2>Error Codes and Typed Failure Reasons</h2>
+  <div class="error-grid">
+    <div class="error-card">
+      <div class="e-code">ERR_PROPOSAL_INCOMPLETE</div>
+      <div class="e-name">Proposal Missing Required Fields</div>
+      <p>Submitted proposal is missing one or more required fields (description, technical spec, rollback plan, implementation window). Proposal held in DRAFT state until complete.</p>
+    </div>
+    <div class="error-card">
+      <div class="e-code">ERR_DELIBERATION_PERIOD_NOT_ELAPSED</div>
+      <div class="e-name">Vote Called Before Minimum Deliberation</div>
+      <p>Institution attempted to call a vote before the 5-day minimum deliberation period elapsed. Vote call rejected. Middleware logs the attempt and the time remaining.</p>
+    </div>
+    <div class="error-card">
+      <div class="e-code">ERR_VOTE_PAYLOAD_HASH_MISMATCH</div>
+      <div class="e-name">Vote Payload Doesn't Match Forum Record</div>
+      <p>Checker verification step found that the proposal hash in the signing ceremony envelope doesn't match the governance forum record. Institution must reject the ceremony. Middleware investigates envelope construction.</p>
+    </div>
+    <div class="error-card">
+      <div class="e-code">ERR_QUORUM_NOT_REACHED</div>
+      <div class="e-name">Vote Window Expired Without Quorum</div>
+      <p>7-day vote window closed without sufficient approvals. Proposal returned to DELIBERATION state. Submitter may revise and resubmit.</p>
+    </div>
+    <div class="error-card">
+      <div class="e-code">ERR_EXECUTION_WINDOW_EXPIRED</div>
+      <div class="e-name">Execution Signatures Not Collected in Time</div>
+      <p>72-hour execution window elapsed without execution quorum. All participants alerted. Fresh authorization required before any retry — the prior vote does not carry over.</p>
+    </div>
+    <div class="error-card">
+      <div class="e-code">ERR_UPGRADE_TX_NOT_CONFIRMED</div>
+      <div class="e-name">Upgrade Transaction Not Confirmed On-Chain</div>
+      <p>No on-chain confirmation within 10 ledger closes after broadcast. All participants alerted immediately. Do not retry without fresh institution authorization.</p>
+    </div>
+    <div class="error-card">
+      <div class="e-code">ERR_EMERGENCY_QUORUM_INSUFFICIENT</div>
+      <div class="e-name">Emergency Session Cannot Proceed</div>
+      <p>Fewer than 3 institutions acknowledged the emergency session within 15 minutes. Session cannot proceed. Superstructure operations escalates to Governance Council directly.</p>
+    </div>
+    <div class="error-card">
+      <div class="e-code">ERR_EMERGENCY_VOTE_EXPIRED</div>
+      <div class="e-name">Emergency Vote Window Elapsed Without Quorum</div>
+      <p>24-hour emergency vote window closed without quorum. Governance Council convenes. May authorize extended window or alternative remediation path.</p>
+    </div>
+    <div class="error-card">
+      <div class="e-code">ERR_DISPUTE_MISSING_EVIDENCE</div>
+      <div class="e-name">Dispute Filed Without Supporting Documentation</div>
+      <p>Dispute submission did not include required evidence (event logs, signing records, forum timestamps). Dispute held in PENDING state until evidence is provided.</p>
+    </div>
+    <div class="error-card">
+      <div class="e-code">ERR_COUNCIL_QUORUM_UNAVAILABLE</div>
+      <div class="e-name">Governance Council Cannot Convene</div>
+      <p>Council cannot reach quorum within the required window. Ruling window extended by 7 days. Related governance activities suspended pending ruling. All parties notified.</p>
+    </div>
+    <div class="error-card">
+      <div class="e-code">ERR_REVIEWER_ROLE_ABSENT</div>
+      <div class="e-name">Governance Signing Without Reviewer Authorization</div>
+      <p>Institution attempted to submit a governance vote without Reviewer authorization. Submission rejected. Institution must either staff a Reviewer or abstain from the vote.</p>
+    </div>
+    <div class="error-card">
+      <div class="e-code">ERR_GOVERNANCE_MINIMUM_QUORUM_BREACH</div>
+      <div class="e-name">Below Absolute Minimum Quorum Floor</div>
+      <p>Fewer than 3 institutions participating in any vote type. Vote cannot proceed regardless of percentage thresholds. Cohort health alert issued to all participants.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 10 SCHEMAS -->
+<div class="section" id="schemas">
+  <div class="section-number">Section 10</div>
+  <h2>Governance Payload Schemas</h2>
+
+  <h3>Governance Vote Signing Ceremony Envelope</h3>
+  <p>Issued by middleware when a vote is called. Institution's Checker verifies all fields before signing.</p>
+  <div class="schema-block">
+    <span class="sb">{</span><br>
+    &nbsp;&nbsp;<span class="sf">"envelopeId"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// unique envelope identifier; used for nonce tracking</span><br>
+    &nbsp;&nbsp;<span class="sf">"actionClass"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// "GOVERNANCE_VOTE" (placeholder — see UNKNOWN-01)</span><br>
+    &nbsp;&nbsp;<span class="sf">"proposalId"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// unique proposal identifier from governance forum</span><br>
+    &nbsp;&nbsp;<span class="sf">"proposalHash"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// SHA-256 of proposal document as published in forum; Checker verifies this matches</span><br>
+    &nbsp;&nbsp;<span class="sf">"voteDirection"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// "APPROVE" | "REJECT" | "ABSTAIN"</span><br>
+    &nbsp;&nbsp;<span class="sf">"institutionId"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// unique institution identifier from founding cohort registry</span><br>
+    &nbsp;&nbsp;<span class="sf">"validatorPubKey"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// institution's validator public key</span><br>
+    &nbsp;&nbsp;<span class="sf">"nonce"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// unique per-ceremony; retained 30 days for replay protection</span><br>
+    &nbsp;&nbsp;<span class="sf">"issuedAt"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// ISO 8601 UTC; freshness window 120 seconds per individual signing</span><br>
+    &nbsp;&nbsp;<span class="sf">"expiresAt"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// ISO 8601 UTC; vote window expiry (7 days for routine, 24h for emergency)</span><br>
+    &nbsp;&nbsp;<span class="sf">"specVersion"</span>: <span class="st">string</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// governance spec version; mismatch triggers ERR_SPEC_VERSION_MISMATCH</span><br>
+    <span class="sb">}</span>
+  </div>
+
+  <h3>Governance Execution Payload</h3>
+  <p>Constructed by middleware after vote quorum reached. Separate from vote envelope — institutions sign this in a second ceremony to authorize execution.</p>
+  <div class="schema-block">
+    <span class="sb">{</span><br>
+    &nbsp;&nbsp;<span class="sf">"executionId"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// unique execution identifier; links to proposalId</span><br>
+    &nbsp;&nbsp;<span class="sf">"proposalId"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// must match the voted proposal</span><br>
+    &nbsp;&nbsp;<span class="sf">"proposalHash"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// same hash as vote envelope; Checker re-verifies before execution signing</span><br>
+    &nbsp;&nbsp;<span class="sf">"actionClass"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// specific action being executed (e.g., "PROTOCOL_UPGRADE", "PARAMETER_CHANGE")</span><br>
+    &nbsp;&nbsp;<span class="sf">"executionParams"</span>: <span class="st">object</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// action-specific parameters; exact fields depend on actionClass</span><br>
+    &nbsp;&nbsp;<span class="sf">"voteQuorumRecord"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// hash of the vote tally that authorized this execution</span><br>
+    &nbsp;&nbsp;<span class="sf">"executionWindowStart"</span>: <span class="st">string</span>,<span class="sc">// ISO 8601 UTC; when 72-hour execution window opened</span><br>
+    &nbsp;&nbsp;<span class="sf">"executionWindowEnd"</span>: <span class="st">string</span>,&nbsp;&nbsp;<span class="sc">// ISO 8601 UTC; window closes 72 hours after quorum reached</span><br>
+    &nbsp;&nbsp;<span class="sf">"nonce"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// separate nonce from vote ceremony; 30-day retention</span><br>
+    &nbsp;&nbsp;<span class="sf">"specVersion"</span>: <span class="st">string</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// governance spec version</span><br>
+    <span class="sb">}</span>
+  </div>
+
+  <h3>Dispute Filing Record</h3>
+  <div class="schema-block">
+    <span class="sb">{</span><br>
+    &nbsp;&nbsp;<span class="sf">"disputeId"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// unique dispute identifier</span><br>
+    &nbsp;&nbsp;<span class="sf">"filedBy"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// institution or operator ID of filing party</span><br>
+    &nbsp;&nbsp;<span class="sf">"disputeType"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// "TECHNICAL" | "PROCESS" | "CUSTODY"</span><br>
+    &nbsp;&nbsp;<span class="sf">"disputedParty"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// institution or operator ID of disputed party</span><br>
+    &nbsp;&nbsp;<span class="sf">"allegation"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// specific allegation in plain language</span><br>
+    &nbsp;&nbsp;<span class="sf">"evidenceRefs"</span>: <span class="st">array</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// array of event correlation IDs, forum timestamps, or signing ceremony records</span><br>
+    &nbsp;&nbsp;<span class="sf">"requestedResolution"</span>: <span class="st">string</span>,&nbsp;<span class="sc">// what the filing party is asking for</span><br>
+    &nbsp;&nbsp;<span class="sf">"filedAt"</span>: <span class="st">string</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// ISO 8601 UTC; response window clock starts here</span><br>
+    &nbsp;&nbsp;<span class="sf">"responseDeadline"</span>: <span class="st">string</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sc">// ISO 8601 UTC; 4h custody, 24h process, 48h technical</span><br>
+    <span class="sb">}</span>
+  </div>
+</div>
+
+<!-- 11 EVENTS -->
+<div class="section" id="events">
+  <div class="section-number">Section 11</div>
+  <h2>Governance Event Registry</h2>
+  <ul class="event-list">
+    <li><span class="event-tag">GOVERNANCE_PROPOSAL_SUBMITTED</span> New proposal submitted to forum; middleware publishes to all participants; deliberation clock starts</li>
+    <li><span class="event-tag">GOVERNANCE_DELIBERATION_ACTIVE</span> Proposal in active deliberation; operators have 48 hours to provide technical assessment</li>
+    <li><span class="event-tag">GOVERNANCE_PROPOSAL_INACTIVE</span> No forum engagement after 48 hours; submitter alerted</li>
+    <li><span class="event-tag">GOVERNANCE_VOTE_CALLED</span> Institution called vote after minimum deliberation; signing ceremony envelopes issued</li>
+    <li><span class="event-tag">GOVERNANCE_VOTE_RECEIVED</span> Institution submitted signed vote via signing ceremony</li>
+    <li><span class="event-tag">GOVERNANCE_QUORUM_REACHED</span> Sufficient votes received; middleware constructs execution payload; execution envelopes issued</li>
+    <li><span class="event-tag">GOVERNANCE_EXECUTION_ENVELOPES_ISSUED</span> Execution signing ceremony envelopes issued; 72-hour window opens</li>
+    <li><span class="event-tag">GOVERNANCE_UPGRADE_EXECUTED</span> Execution quorum met; middleware broadcasts execution transaction</li>
+    <li><span class="event-tag">GOVERNANCE_UPGRADE_CONFIRMED</span> On-chain confirmation received within 10 ledger closes</li>
+    <li><span class="event-tag">GOVERNANCE_EMERGENCY_ACTIVATED</span> Tier 3 channel activated; 15-minute acknowledgment window opens</li>
+    <li><span class="event-tag">GOVERNANCE_EMERGENCY_QUORUM_CONFIRMED</span> Minimum institutions acknowledged emergency session within 15 minutes</li>
+    <li><span class="event-tag">GOVERNANCE_EMERGENCY_VOTE_CALLED</span> Emergency vote initiated; compressed deliberation and 24-hour vote window</li>
+    <li><span class="event-tag">GOVERNANCE_EMERGENCY_QUORUM_REACHED</span> Emergency vote reached 51% quorum</li>
+    <li><span class="event-tag">GOVERNANCE_DISPUTE_FILED</span> Dispute submitted with classification, allegation, and evidence</li>
+    <li><span class="event-tag">GOVERNANCE_DISPUTE_RESPONSE_RECEIVED</span> Disputed party responded within the required window</li>
+    <li><span class="event-tag">GOVERNANCE_DISPUTE_NO_RESPONSE</span> Disputed party failed to respond; automatic escalation to Governance Council</li>
+    <li><span class="event-tag">GOVERNANCE_DISPUTE_RESOLVED</span> Both parties acknowledged resolution; middleware logs closure</li>
+    <li><span class="event-tag">GOVERNANCE_COUNCIL_ESCALATED</span> Dispute escalated to Governance Council; 48-hour acknowledgment window</li>
+    <li><span class="event-tag">GOVERNANCE_COUNCIL_RULING_ISSUED</span> Governance Council issued ruling within 14-day window</li>
+    <li><span class="event-tag">GOVERNANCE_PARTICIPANT_SUSPENDED</span> Participant failed to comply with Council ruling within 30 days; suspended from governance</li>
+    <li><span class="event-tag err">ERR_PROPOSAL_INCOMPLETE</span> Proposal missing required fields; held in DRAFT</li>
+    <li><span class="event-tag err">ERR_DELIBERATION_PERIOD_NOT_ELAPSED</span> Vote called before 5-day minimum</li>
+    <li><span class="event-tag err">ERR_VOTE_PAYLOAD_HASH_MISMATCH</span> Proposal hash in envelope doesn't match forum record</li>
+    <li><span class="event-tag err">ERR_QUORUM_NOT_REACHED</span> Vote window expired without sufficient approvals</li>
+    <li><span class="event-tag err">ERR_EXECUTION_WINDOW_EXPIRED</span> 72-hour execution window elapsed; fresh authorization required</li>
+    <li><span class="event-tag err">ERR_EMERGENCY_QUORUM_INSUFFICIENT</span> Fewer than 3 institutions acknowledged emergency session</li>
+    <li><span class="event-tag err">ERR_REVIEWER_ROLE_ABSENT</span> Governance signing attempted without Reviewer authorization</li>
+  </ul>
+</div>
+
+<!-- 12 CONTROLS -->
+<div class="section" id="controls">
+  <div class="section-number">Section 12</div>
+  <h2>Operational Controls and Runbook</h2>
+  <table class="spec-table">
+    <thead><tr><th>Control Area</th><th>Required Control</th><th>Evidence</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Proposal Integrity</strong></td><td>Middleware validates all required proposal fields before publishing. Incomplete proposals held in DRAFT. No vote can be called on a DRAFT proposal.</td><td>Proposal validation log</td></tr>
+      <tr><td><strong>Deliberation Enforcement</strong></td><td>Middleware enforces 5-day minimum before accepting a vote call. Clock starts at <code>GOVERNANCE_PROPOSAL_SUBMITTED</code> timestamp.</td><td>Deliberation period log per proposal</td></tr>
+      <tr><td><strong>Hash Verification</strong></td><td>Signing ceremony envelopes carry proposal hash. Checker must independently verify hash matches governance forum record before signing. Any mismatch triggers <code>ERR_VOTE_PAYLOAD_HASH_MISMATCH</code>.</td><td>Checker verification log per ceremony</td></tr>
+      <tr><td><strong>Reviewer Enforcement</strong></td><td>Governance signing submissions validated for Reviewer authorization. Submissions without Reviewer field populated are rejected with <code>ERR_REVIEWER_ROLE_ABSENT</code>.</td><td>Signing ceremony role records</td></tr>
+      <tr><td><strong>Quorum Integrity</strong></td><td>Quorum calculated only from participating institutions in good standing. Suspended participants excluded. Minimum 3-institution floor enforced regardless of percentage threshold.</td><td>Quorum calculation log per vote</td></tr>
+      <tr><td><strong>Execution Window</strong></td><td>Execution envelopes expire after 72 hours. Expired envelopes cannot be signed. Fresh authorization required for any retry after <code>ERR_EXECUTION_WINDOW_EXPIRED</code>.</td><td>Execution window expiry log</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Runbook — Routine Proposal Lifecycle</h3>
+  <ol>
+    <li>Submit proposal to governance forum with all required fields (description, technical spec, rollback plan, implementation window)</li>
+    <li>Await operator technical assessment within 48 hours</li>
+    <li>Allow minimum 5-day deliberation period; respond to questions in forum</li>
+    <li>Any institution calls vote; middleware issues signing ceremony envelopes to all participants</li>
+    <li>Each institution completes signing ceremony (Maker prepares, Checker verifies proposal hash against forum record, Reviewer authorizes) within 7-day vote window</li>
+    <li>Middleware tallies votes; if quorum reached, constructs execution payload and issues execution envelopes</li>
+    <li>Institutions complete execution signing ceremonies within 72 hours</li>
+    <li>Middleware broadcasts; operators implement within specified window</li>
+    <li>Middleware confirms on-chain; logs <code>GOVERNANCE_UPGRADE_CONFIRMED</code></li>
+  </ol>
+
+  <h3>Runbook — Emergency Patch</h3>
+  <ol>
+    <li>Declare emergency via Tier 3 channel; classify as Severity 1 or 2</li>
+    <li>Middleware activates emergency session; 15-minute acknowledgment window opens</li>
+    <li>Operators provide technical impact assessment within 30 minutes</li>
+    <li>Minimum 1-hour deliberation (Severity 2) or immediate vote (Severity 1 with Council authorization)</li>
+    <li>Emergency vote called; 24-hour window; 51% quorum threshold; Maker/Checker/Reviewer required</li>
+    <li>If quorum reached: execution envelopes issued; 72-hour execution window applies equally</li>
+    <li>If quorum not reached: Governance Council convenes to authorize extended window</li>
+  </ol>
+</div>
+
+<!-- 13 EVIDENCE -->
+<div class="section" id="evidence">
+  <div class="section-number">Section 13</div>
+  <h2>Audit Evidence Artifacts</h2>
+  <ul class="evidence-list">
+    <li>Governance forum record — complete deliberation history for every proposal, including submission timestamp, all comments, operator technical assessments, and vote call timestamp</li>
+    <li>Proposal validation log — middleware record of all proposal submissions with field completeness check and DRAFT/ACTIVE status transitions</li>
+    <li>Vote signing ceremony records — Maker/Checker/Reviewer role records, proposal hash verification results, and signed vote payloads for every governance vote</li>
+    <li>Quorum calculation log — tally record for every vote showing participating institutions, vote directions, quorum threshold applied, and result</li>
+    <li>Execution signing ceremony records — second-round signing records for every executed proposal, confirming hash re-verification at execution time</li>
+    <li>On-chain execution confirmation log — broadcast transaction hashes and on-chain confirmation receipts for every executed governance outcome</li>
+    <li>Emergency session records — Tier 3 channel activation logs, institution acknowledgment timestamps, and emergency vote records</li>
+    <li>Dispute records — all filed disputes with classification, evidence references, response records, and resolution or Council ruling</li>
+    <li>Governance Council rulings — published ruling records with reasoning for all escalated disputes</li>
+    <li>Participant suspension log — any governance participation suspensions with triggering Council ruling and remediation timeline</li>
+  </ul>
+</div>
+
+<!-- 14 ASSURANCE -->
+<div class="section" id="assurance">
+  <div class="section-number">Section 14</div>
+  <h2>Zero-Custody Governance Assurance</h2>
+  <div class="assurance">
+    <div class="a-label">Governance Zero-Custody Guarantee</div>
+    <p>No governance outcome — proposal approval, protocol upgrade, parameter change, emergency patch, or participant removal — executes without institutional signing ceremonies. The orchestration layer cannot approve, authorize, or execute any governance action unilaterally.</p>
+    <p>Governance votes are root-gated actions. Middleware constructs unsigned payloads. Institutions sign inside their custody environments. Middleware broadcasts signed transactions. The key never moves. The deliberation is decentralized. The authorization is not.</p>
+    <p>The two-round signing model (vote ceremony + execution ceremony) means an institution that approved a proposal in principle must separately authorize the specific execution payload. The Checker's job in the execution round is an explicit human verification that the thing being executed matches the thing that was voted on. This is not a procedural formality — it is the control that prevents middleware from executing something other than what the cohort approved.</p>
+    <p>Dispute resolution and escalation pathways are advisory and administrative processes. They do not grant any party — including the Governance Council — the ability to sign on behalf of an institution or compel an institution to participate in a signing ceremony.</p>
+  </div>
+</div>
+
+<!-- 15 VERIFICATION -->
+<div class="section" id="verification">
+  <div class="section-number">Section 15</div>
+  <h2>Completion Verification</h2>
+  <table class="spec-table">
+    <thead><tr><th>Required Step</th><th>Addressed In</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Define communication channels and operational cadence for the founding validator cohort</td><td>Section 04 — four communication tiers, weekly/monthly/quarterly/as-needed cadence, full threshold reference table</td><td class="check">✓ Complete</td></tr>
+      <tr><td>Specify governance coordination mechanisms for network upgrades and emergency patches</td><td>Section 05 — six-phase standard upgrade process with named events and rollback paths; three-phase emergency patch process; two-round signing model for deliberation vs execution separation</td><td class="check">✓ Complete</td></tr>
+      <tr><td>Map segregation of duties between institutional allocators, node operators, and orchestration layer during governance events</td><td>Section 06 — full role matrix (11 governance actions × 3 layers), institutional Maker/Checker/Reviewer requirements for governance signing, explicit list of what middleware cannot do</td><td class="check">✓ Complete</td></tr>
+      <tr><td>Establish dispute resolution and escalation pathways for cohort participants</td><td>Section 07 — three dispute types with classification criteria and response windows, five-phase escalation process with named events, Governance Council binding vs advisory ruling distinction</td><td class="check">✓ Complete</td></tr>
+      <tr><td>Publish to publicly accessible URL</td><td>This document — includes assumption registry, four design tradeoffs, three governance payload schemas, governance state machine, 12 typed error codes, two runbooks, and change log</td><td class="check">✓ Complete</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 16 CHANGELOG -->
+<div class="section" id="changelog">
+  <div class="section-number">Section 16</div>
+  <h2>Change Log</h2>
+  <div class="changelog-row">
+    <div class="cl-ver">v1.0</div>
+    <div class="cl-date">March 2026</div>
+    <div class="cl-note">Initial publication. Defined four communication tiers with response time thresholds, weekly/monthly/quarterly operational cadence, full threshold reference table with 12 thresholds, six-phase standard upgrade process, three-phase emergency patch process, two-round signing model separating deliberation from execution authorization, eleven-action governance role matrix, Maker/Checker/Reviewer requirements for governance signing with Reviewer non-waivable, three dispute types with classification criteria and differentiated response windows, five-phase escalation process with Governance Council, three governance payload schemas, governance state machine, twelve typed error codes, and assumption registry with three open questions for Post Fiat core confirmation.</div>
+  </div>
+</div>
+
+</div>
+<div class="footer-bar">Superstructure M3 · Founding Cohort Governance Coordination Model · Version 1.0 · Post Fiat Network</div>
+</body>
+</html>
